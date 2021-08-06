@@ -47,7 +47,8 @@ class DateWidget extends StatelessWidget {
               Text(
                   new DateFormat("E", locale)
                       .format(date)
-                      .toUpperCase(), // WeekDay
+                      .toUpperCase()
+                      .substring(0, 1), // WeekDay
                   style: dayTextStyle),
               Text(date.day.toString(), // Date
                   style: dateTextStyle),
