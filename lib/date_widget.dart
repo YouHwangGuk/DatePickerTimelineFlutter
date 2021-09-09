@@ -17,7 +17,11 @@ class DateWidget extends StatelessWidget {
   final DateSelectionCallback? onDateSelected;
   final String? locale;
 
+  final Widget Function(DateTime date, TextStyle? dayStyle,
+      TextStyle? dateStyle, String? locale) widget;
+
   DateWidget({
+    required this.widget,
     required this.date,
     required this.monthTextStyle,
     required this.dayTextStyle,
@@ -38,23 +42,7 @@ class DateWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(8.0)),
           color: selectionColor,
         ),
-        child: Padding(
-          padding: EdgeInsets.all(8),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                  new DateFormat("E", locale)
-                      .format(date)
-                      .toUpperCase()
-                      .substring(0, 1), // WeekDay
-                  style: dayTextStyle),
-              Text(date.day.toString(), // Date
-                  style: dateTextStyle),
-            ],
-          ),
-        ),
+        child: widget(date, dayTextStyle, dateTextStyle, locale),
       ),
       onTap: () {
         // Check if onDateSelected is not null
