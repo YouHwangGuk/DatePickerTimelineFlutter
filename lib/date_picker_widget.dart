@@ -60,6 +60,9 @@ class DatePicker extends StatefulWidget {
 
   final ScrollController scrollController;
 
+  final Widget Function(DateTime date, TextStyle? dayStyle,
+      TextStyle? dateStyle, String? locale) widget;
+
   DatePicker(
     this.startDate,
     this.scrollController, {
@@ -79,6 +82,7 @@ class DatePicker extends StatefulWidget {
     this.daysCount = 500,
     this.onDateChange,
     this.locale = "en_US",
+    required this.widget,
   }) : assert(
             activeDates == null || inactiveDates == null,
             "Can't "
@@ -173,6 +177,7 @@ class _DatePickerState extends State<DatePicker> {
 
           // Return the Date Widget
           return DateWidget(
+            widget: widget.widget,
             date: date,
             monthTextStyle: isDeactivated
                 ? deactivatedMonthStyle

@@ -64,6 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: DatePicker(
                   DateTime.now(),
                   ScrollController(),
+                  widget: (DateTime date, TextStyle? dayStyle,
+                      TextStyle? dateStyle, String? locale) {
+                    return Container();
+                  },
                   width: 60,
                   height: 80,
                   controller: _controller,
