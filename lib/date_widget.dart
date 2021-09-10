@@ -14,22 +14,31 @@ class DateWidget extends StatelessWidget {
   final DateTime date;
   final TextStyle? monthTextStyle, dayTextStyle, dateTextStyle;
   final Color selectionColor;
+  final Color circleBorderColor;
+  final Color circleInnerColor;
+  final bool bridgeEnableRight;
+  final bool bridgeEnableLeft;
   final DateSelectionCallback? onDateSelected;
   final String? locale;
 
-  final Widget Function(DateTime date, TextStyle? dayStyle,
-      TextStyle? dateStyle, String? locale) widget;
+  final Color textColor;
+  final Color bridgeColor;
 
   DateWidget({
-    required this.widget,
+    required this.circleBorderColor,
+    required this.bridgeEnableLeft,
+    required this.bridgeEnableRight,
+    required this.circleInnerColor,
     required this.date,
     required this.monthTextStyle,
     required this.dayTextStyle,
     required this.dateTextStyle,
     required this.selectionColor,
+    required this.textColor,
     this.width,
     this.onDateSelected,
     this.locale,
+    required this.bridgeColor,
   });
 
   @override
@@ -37,12 +46,79 @@ class DateWidget extends StatelessWidget {
     return InkWell(
       child: Container(
         width: width,
-        margin: EdgeInsets.all(3.0),
+        margin: EdgeInsets.all(3),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(8.0)),
+          borderRadius: BorderRadius.all(Radius.circular(39)),
           color: selectionColor,
         ),
-        child: widget(date, dayTextStyle, dateTextStyle, locale),
+        child: Padding(
+            padding: EdgeInsets.fromLTRB(0, 8, 0, 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                    new DateFormat("E", locale)
+                        .format(date)
+                        .toUpperCase()
+                        .substring(0, 1), // WeekDay
+                    style: dayTextStyle),
+                SizedBox(
+                  height: 4,
+                ),
+                Expanded(
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Positioned(
+                        left: -3,
+                        child: Container(
+                          width: width! + 6,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: bridgeEnableLeft
+                                    ? Container(
+                                        height: 7,
+                                        constraints: BoxConstraints(
+                                            minWidth: double.infinity),
+                                        color: bridgeColor,
+                                      )
+                                    : Container(),
+                              ),
+                              Container(
+                                width: 28,
+                                height: 28,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    border:
+                                        Border.all(color: circleBorderColor),
+                                    color: circleInnerColor),
+                                child: Center(
+                                  child: Text(date.day.toString(), // Date
+                                      style: TextStyle(
+                                          fontSize: 14, color: textColor)),
+                                ),
+                              ),
+                              Expanded(
+                                child: bridgeEnableRight
+                                    ? Container(
+                                        height: 7,
+                                        constraints: BoxConstraints(
+                                            minWidth: double.infinity),
+                                        color: bridgeColor,
+                                      )
+                                    : Container(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            )),
       ),
       onTap: () {
         // Check if onDateSelected is not null

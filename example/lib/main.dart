@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Container(
           padding: EdgeInsets.all(20.0),
-          color: Colors.blueGrey[100],
+          color: Colors.white,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -63,17 +63,18 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 child: DatePicker(
                   DateTime.now(),
-                  ScrollController(),
-                  widget: (DateTime date, TextStyle? dayStyle,
-                      TextStyle? dateStyle, String? locale) {
-                    return Container();
+                  innerColor: Color.fromRGBO(68, 38, 222, 1),
+                  borderColor: Color.fromRGBO(161, 146, 238, 1),
+                  dateState: {
+                    DateTime(2021, 9, 10): 1,
+                    DateTime(2021, 9, 11): 2
                   },
-                  width: 60,
-                  height: 80,
+                  width: 48,
+                  height: 64,
                   controller: _controller,
                   initialSelectedDate: DateTime.now(),
-                  selectionColor: Colors.black,
-                  selectedTextColor: Colors.white,
+                  selectionColor: Color.fromRGBO(246, 244, 253, 1),
+                  selectedTextColor: Colors.black,
                   inactiveDates: [
                     DateTime.now().add(Duration(days: 3)),
                     DateTime.now().add(Duration(days: 4)),
