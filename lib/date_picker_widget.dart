@@ -203,7 +203,10 @@ class _DatePickerState extends State<DatePicker> {
             }
           }
 
-          if (state == 0 && isSelected) {}
+          if (state == 0 && isSelected) {
+            innerColor = widget.selectionColor;
+            borderColor = widget.selectionColor;
+          }
           // Check if this date is the one that is currently selected
 
           // Return the Date Widget
