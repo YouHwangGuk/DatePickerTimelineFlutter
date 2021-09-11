@@ -91,8 +91,8 @@ class DateWidget extends StatelessWidget {
                                 height: 28,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
-                                    border:
-                                        Border.all(color: circleBorderColor),
+                                    border: Border.all(
+                                        color: circleBorderColor, width: 1.5),
                                     color: circleInnerColor),
                                 child: Center(
                                   child: Text(date.day.toString(), // Date
