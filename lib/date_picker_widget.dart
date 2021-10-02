@@ -58,7 +58,7 @@ class DatePicker extends StatefulWidget {
   /// Locale for the calendar default: en_us
   final String locale;
 
-  final Map<DateTime, int> dateState;
+  final Map<DateTime, DateState> dateState;
 
   final Color borderColor;
 
@@ -177,9 +177,9 @@ class _DatePickerState extends State<DatePicker> {
           bool isSelected =
               _currentDate != null ? _compareDate(date, _currentDate!) : false;
 
-          int? state = widget.dateState[date];
-          int? leftState = widget.dateState[date.add(Duration(days: -1))];
-          int? rightState = widget.dateState[date.add(Duration(days: 1))];
+          DateState? state = widget.dateState[date];
+          DateState? leftState = widget.dateState[date.add(Duration(days: -1))];
+          DateState? rightState = widget.dateState[date.add(Duration(days: 1))];
 
           Color borderColor = Colors.white;
           Color innerColor = Colors.white;
@@ -187,26 +187,33 @@ class _DatePickerState extends State<DatePicker> {
           bool bridgeRight = false;
           bool bridgeLeft = false;
 
-          if (state != null && state != 0) {
-            if (state == 1) {
+          if (state == DateState.partiallyCompleted ||
+              state == DateState.fullyCompleted) {
+            if (state == DateState.partiallyCompleted) {
               borderColor = widget.borderColor;
-            } else if (state == 2) {
+            } else if (state == DateState.fullyCompleted) {
               borderColor = widget.innerColor;
               innerColor = widget.innerColor;
               textColor = Colors.white;
             }
-            if (leftState != null && leftState != 0) {
+            if (leftState == DateState.partiallyCompleted ||
+                leftState == DateState.fullyCompleted) {
               bridgeLeft = true;
             }
-            if (rightState != null && rightState != 0) {
+            if (rightState == DateState.partiallyCompleted ||
+                rightState == DateState.fullyCompleted) {
               bridgeRight = true;
+            }
+          } else {
+            if (state == DateState.noPlan || state == null) {
+              textColor = Colors.grey[400]!;
+            }
+            if (isSelected) {
+              innerColor = widget.selectionColor;
+              borderColor = widget.selectionColor;
             }
           }
 
-          if ((state == 0 || state == null) && isSelected) {
-            innerColor = widget.selectionColor;
-            borderColor = widget.selectionColor;
-          }
           // Check if this date is the one that is currently selected
 
           // Return the Date Widget
@@ -341,3 +348,5 @@ class DatePickerController {
     return (offset * _datePickerState!.widget.width) + (offset * 6);
   }
 }
+
+enum DateState { noPlan, notCompleted, partiallyCompleted, fullyCompleted }

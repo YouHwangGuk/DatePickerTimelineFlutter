@@ -66,8 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   innerColor: Color.fromRGBO(68, 38, 222, 1),
                   borderColor: Color.fromRGBO(161, 146, 238, 1),
                   dateState: {
-                    DateTime(2021, 9, 10): 1,
-                    DateTime(2021, 9, 11): 2
+                    DateTime(2021, 10, 10): DateState.noPlan,
+                    DateTime(2021, 10, 11): DateState.notCompleted,
                   },
                   width: 48,
                   height: 64,
