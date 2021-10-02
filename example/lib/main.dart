@@ -75,17 +75,19 @@ class _MyHomePageState extends State<MyHomePage> {
                   initialSelectedDate: DateTime.now(),
                   selectionColor: Color.fromRGBO(246, 244, 253, 1),
                   selectedTextColor: Colors.black,
-                  inactiveDates: [
-                    DateTime.now().add(Duration(days: 3)),
-                    DateTime.now().add(Duration(days: 4)),
-                    DateTime.now().add(Duration(days: 7))
-                  ],
+                  // inactiveDates: [
+                  //   DateTime.now().add(Duration(days: 3)),
+                  //   DateTime.now().add(Duration(days: 4)),
+                  //   DateTime.now().add(Duration(days: 7))
+                  // ],
                   onDateChange: (date) {
                     // New date selected
+                    _controller.animateToDate(date);
                     setState(() {
                       _selectedValue = date;
                     });
                   },
+                  totalWidth: MediaQuery.of(context).size.width - 40,
                 ),
               ),
             ],

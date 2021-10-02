@@ -64,12 +64,15 @@ class DatePicker extends StatefulWidget {
 
   final Color innerColor;
 
+  final double totalWidth;
+
   DatePicker(
     this.startDate, {
     Key? key,
     required this.dateState,
     required this.borderColor,
     required this.innerColor,
+    required this.totalWidth,
     this.width = 60,
     this.height = 80,
     this.controller,
@@ -345,7 +348,10 @@ class DatePickerController {
         _datePickerState!.widget.startDate.day);
 
     int offset = date.difference(startDate).inDays;
-    return (offset * _datePickerState!.widget.width) + (offset * 6);
+    return (offset * _datePickerState!.widget.width) +
+        (offset * 6) -
+        _datePickerState!.widget.totalWidth / 2 +
+        _datePickerState!.widget.width / 2;
   }
 }
 
