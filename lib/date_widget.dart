@@ -58,10 +58,12 @@ class DateWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                    new DateFormat("E", locale)
-                        .format(date)
-                        .toUpperCase()
-                        .substring(0, 1), // WeekDay
+                    date.day != 1
+                        ? new DateFormat("E", locale)
+                            .format(date)
+                            .toUpperCase()
+                            .substring(0, 1)
+                        : '${date.month}월', // WeekDay
                     style: dayTextStyle),
                 SizedBox(
                   height: 4,
