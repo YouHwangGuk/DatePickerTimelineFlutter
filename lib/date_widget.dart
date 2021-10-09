@@ -57,14 +57,17 @@ class DateWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text(
-                    date.day != 1
-                        ? new DateFormat("E", locale)
+                date.day != 1
+                    ? Text(
+                        new DateFormat("E", locale)
                             .format(date)
                             .toUpperCase()
-                            .substring(0, 1)
-                        : '${date.month}월', // WeekDay
-                    style: dayTextStyle),
+                            .substring(0, 1), // WeekDay
+                        style: dayTextStyle)
+                    : Text(
+                        '${date.month}월',
+                        style: monthTextStyle,
+                      ),
                 SizedBox(
                   height: 4,
                 ),
