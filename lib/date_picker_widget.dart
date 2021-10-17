@@ -220,11 +220,15 @@ class _DatePickerState extends State<DatePicker> {
             }
           }
 
+          TextStyle monthTextStyle = widget.monthTextStyle;
+          TextStyle dayTextStyle = widget.dateTextStyle;
+
           if (_compareDate(date, widget.today)) {
-            if (state == DateState.noPlan ||
-                state == null ||
-                state == DateState.partiallyCompleted) {
+            if (state != DateState.fullyCompleted) {
               textColor = widget.innerColor;
+              monthTextStyle =
+                  monthTextStyle.copyWith(color: widget.innerColor);
+              dayTextStyle = dayTextStyle.copyWith(color: widget.innerColor);
             }
           }
           // Check if this date is the one that is currently selected
@@ -242,7 +246,7 @@ class _DatePickerState extends State<DatePicker> {
                 ? deactivatedMonthStyle
                 : isSelected
                     ? selectedMonthStyle
-                    : widget.monthTextStyle,
+                    : monthTextStyle,
             dateTextStyle: isDeactivated
                 ? deactivatedDateStyle
                 : isSelected
@@ -252,7 +256,7 @@ class _DatePickerState extends State<DatePicker> {
                 ? deactivatedDayStyle
                 : isSelected
                     ? selectedDayStyle
-                    : widget.dayTextStyle,
+                    : dayTextStyle,
             width: widget.width,
             locale: widget.locale,
             selectionColor:
