@@ -221,7 +221,7 @@ class _DatePickerState extends State<DatePicker> {
           }
 
           TextStyle monthTextStyle = widget.monthTextStyle;
-          TextStyle dayTextStyle = widget.dateTextStyle;
+          TextStyle dayTextStyle = widget.dayTextStyle;
 
           if (_compareDate(date, widget.today)) {
             if (state != DateState.fullyCompleted) {
