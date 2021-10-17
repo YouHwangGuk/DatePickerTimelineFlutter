@@ -12,7 +12,7 @@ import 'package:intl/intl.dart';
 class DateWidget extends StatelessWidget {
   final double? width;
   final DateTime date;
-  final TextStyle? monthTextStyle, dayTextStyle, dateTextStyle;
+  final TextStyle monthTextStyle, dayTextStyle, dateTextStyle;
   final Color selectionColor;
   final Color circleBorderColor;
   final Color circleInnerColor;
@@ -100,10 +100,11 @@ class DateWidget extends StatelessWidget {
                                         color: circleBorderColor, width: 1.5),
                                     color: circleInnerColor),
                                 child: Center(
-                                  child: Text(date.day.toString(), // Date
-                                      style: TextStyle(
-                                          fontSize: 14, color: textColor)),
-                                ),
+                                    child: Text(
+                                  date.day.toString(), // Date
+                                  style:
+                                      dateTextStyle.copyWith(color: textColor),
+                                )),
                               ),
                               Expanded(
                                 child: bridgeEnableRight

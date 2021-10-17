@@ -63,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Container(
                 child: DatePicker(
                   DateTime.now(),
+                  today: DateTime.now(),
                   innerColor: Color.fromRGBO(68, 38, 222, 1),
                   borderColor: Color.fromRGBO(161, 146, 238, 1),
                   dateState: {

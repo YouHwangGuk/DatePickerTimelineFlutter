@@ -66,6 +66,8 @@ class DatePicker extends StatefulWidget {
 
   final double totalWidth;
 
+  final DateTime today;
+
   DatePicker(
     this.startDate, {
     Key? key,
@@ -73,6 +75,7 @@ class DatePicker extends StatefulWidget {
     required this.borderColor,
     required this.innerColor,
     required this.totalWidth,
+    required this.today,
     this.width = 60,
     this.height = 80,
     this.controller,
@@ -217,6 +220,13 @@ class _DatePickerState extends State<DatePicker> {
             }
           }
 
+          if (_compareDate(date, widget.today)) {
+            if (state == DateState.noPlan ||
+                state == null ||
+                state == DateState.partiallyCompleted) {
+              textColor = widget.innerColor;
+            }
+          }
           // Check if this date is the one that is currently selected
 
           // Return the Date Widget
