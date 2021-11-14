@@ -286,6 +286,8 @@ class _DatePickerState extends State<DatePicker> {
 
 class DatePickerController {
   _DatePickerState? _datePickerState;
+  Function() getFutureData = () async {};
+  Function() getPastData = () async {};
 
   void setDatePickerState(_DatePickerState state, DateTime? initDate) {
     _datePickerState = state;
@@ -295,6 +297,15 @@ class DatePickerController {
     } else {
       state.scrollController = ScrollController();
     }
+    state.scrollController!.addListener(() {
+      if (state.scrollController!.position.pixels ==
+          state.scrollController!.position.maxScrollExtent) {
+        getFutureData();
+      }
+      if (state.scrollController!.position.pixels == 0) {
+        getPastData();
+      }
+    });
   }
 
   void jumpToSelection() {
