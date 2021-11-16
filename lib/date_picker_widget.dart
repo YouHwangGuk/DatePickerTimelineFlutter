@@ -305,6 +305,7 @@ class DatePickerController {
       if (state.scrollController!.position.pixels == 0) {
         getPastData();
       }
+      // print('object');
     });
   }
 
@@ -315,6 +316,10 @@ class DatePickerController {
     // jump to the current Date
     _datePickerState!.scrollController!
         .jumpTo(_calculateDateOffset(_datePickerState!._currentDate!));
+  }
+
+  void jumpToDate(DateTime date) {
+    _datePickerState!.scrollController!.jumpTo(_calculateDateOffset(date));
   }
 
   /// This function will animate the Timeline to the currently selected Date

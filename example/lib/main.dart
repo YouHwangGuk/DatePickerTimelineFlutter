@@ -88,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       _selectedValue = date;
                     });
                   },
+                  daysCount: 10,
                   totalWidth: MediaQuery.of(context).size.width - 40,
                 ),
               ),
